@@ -4,7 +4,7 @@
     password: admin123
     url: http://172.31.38.225:8080
     user: admin
-  register: my_jenkins_job_status
+  register: my_jenkins_job_status or override
   ignore_errors: true
 
 #- name: debug
@@ -15,7 +15,7 @@
   ansible.builtin.template:
     src: sjob.xml
     dest: /tmp/test.xml
-  when: my_jenkins_job_status.failed
+  when: my_jenkins_job_status.failed or override
 
 - name: Create Jenkins Jobs
   community.general.jenkins_job:
