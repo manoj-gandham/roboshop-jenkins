@@ -5,4 +5,4 @@ sjobs:
 
 
 mjobs:
-  - { git_repo_url: https://github.com/manoj-gandham/payment.git, job_name: payment }
+  - { git_repo_url: https://github.com/manoj-gandham/cart.git, job_name: cart }
