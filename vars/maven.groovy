@@ -50,7 +50,7 @@ def call () {
             stage('Application Release') {
                 when {
                     expression {
-                        TAG_NAME ==~ ".*"
+                        env.TAG_NAME ==~ ".*"
                     }
                 }
                 steps {
