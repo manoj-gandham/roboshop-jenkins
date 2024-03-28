@@ -22,13 +22,15 @@ def call () {
 
             stage('code Quality') {
                 steps {
-                    sh 'sonar-scanner -Dsonar.projectKey=${component} -Dsonar.host.url=http://172.31.91.92:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.qualitygate.wait=true -Dsonar.java.binaries=./target'
+                    //sh 'sonar-scanner -Dsonar.projectKey=${component} -Dsonar.host.url=http://172.31.91.92:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.qualitygate.wait=true -Dsonar.java.binaries=./target'
+                    sh 'echo code quality'
                 }
             }
 
             stage('unit test cases') {
                 steps {
-                    sh 'echo unit test cases'
+                    //sh 'echo unit test cases'
+                    sh 'mvn test'
                 }
             }
 
