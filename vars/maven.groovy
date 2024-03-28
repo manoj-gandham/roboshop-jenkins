@@ -16,7 +16,7 @@ def call () {
 
             stage('code Compile') {
                 steps {
-                    sh 'echo code compile'
+                    sh 'mvn compile'
                 }
             }
 
