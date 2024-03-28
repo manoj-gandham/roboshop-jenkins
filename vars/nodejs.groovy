@@ -40,6 +40,18 @@ def call () {
                 }
             }
 
+            stage('Application Release') {
+                when {
+                    expression {
+                        env.TAG_NAME ==~ ".*"
+                    }
+                }
+                steps {
+                    sh 'env'
+                    sh 'curl -v -u admin:admin123 --upload-file server.js http://172.31.85.41:8081/repository/cart/server.js'
+                }
+            }
+
         }
 
         post {
