@@ -50,6 +50,7 @@ def call () {
             stage('Application Release') {
                 steps {
                     sh 'env'
+                    sh 'release'
                 }
             }
 
