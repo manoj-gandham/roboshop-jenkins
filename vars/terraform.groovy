@@ -1,4 +1,4 @@
-def call () {
+def call() {
     pipeline {
 
         agent {
@@ -11,14 +11,14 @@ def call () {
             ansiColor('xterm')
         }
 
-
         parameters {
             choice(name: 'env', choices: ['dev', 'prod'], description: 'Pick environment')
+            choice(name: 'action', choices: ['apply', 'destroy'], description: 'Pick Action')
         }
 
         stages {
 
-            stage('Terraform Init') {
+            stage('Terraform INIT') {
                 steps {
                     sh 'terraform init -backend-config=env-${env}/state.tfvars'
                 }
@@ -26,7 +26,7 @@ def call () {
 
             stage('Terraform Apply') {
                 steps {
-                    sh 'terraform apply -auto-approve -var-file=env-${env}/main.tfvars'
+                    sh 'terraform ${action} -auto-approve -var-file=env-${env}/main.tfvars'
                 }
             }
 
@@ -39,5 +39,6 @@ def call () {
         }
 
     }
-}
 
+
+}
