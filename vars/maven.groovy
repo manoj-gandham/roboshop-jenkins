@@ -11,6 +11,10 @@ def call () {
             ansiColor('xterm')
         }
 
+        environment {
+            NEXUS = credentials('NEXUS')
+        }
+
 
         stages {
 
@@ -54,8 +58,10 @@ def call () {
                     }
                 }
                 steps {
-                    sh 'env'
-                    sh 'curl -v -u admin:admin123 --upload-file pom.xml http://172.31.85.41:8081/repository/shipping/pom.xml'
+                    sh 'mvn package ; cp target/${component}-1.0.jar ${component}.jar'
+                    sh 'echo $TAG_NAME >VERSION'
+                    sh 'zip -r ${component}-${TAG_NAME}.zip ${component}.jar VERSION'
+                    sh 'curl -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${component}-${TAG_NAME}.zip http://172.31.85.41:8081/repository/${component}/${component}-${TAG_NAME}.zip'
                 }
             }
 
