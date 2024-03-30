@@ -55,7 +55,7 @@ def call () {
                     sh 'echo $TAG_NAME >VERSION'
                     sh 'zip -r ${component}-${TAG_NAME}.zip *'
                     sh 'zip -d ${component}-${TAG_NAME}.zip Jenkinsfile'
-                    sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.85.41:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+                    sh 'curl -v -u {NEXUS_USR}:${NEXUS_PSW} --upload-file ${component}-${TAG_NAME}.zip http://172.31.85.41:8081/repository/${component}/${component}-${TAG_NAME}.zip'
                 }
             }
 
